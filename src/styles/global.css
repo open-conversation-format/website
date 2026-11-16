@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/jetbrains-mono/index.css";
+
+/*
+  Theme: black and white with one accent.
+  Ink and paper are the two brand colors from spec/assets/BRAND.md,
+  the accent is the brand violet. Light and dark follow the system setting.
+*/
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --soft: #f6f8fa;
+  --ink: #0e1116;
+  --muted: #57606a;
+  --line: #d8dee4;
+  --line-strong: #8c959f;
+  --accent: #7c3aed;
+  --accent-ink: #6d28d9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116;
+    --soft: #161b22;
+    --ink: #f0f6fc;
+    --muted: #9198a1;
+    --line: #2b323b;
+    --line-strong: #57606a;
+    --accent: #7c3aed;
+    --accent-ink: #a78bfa;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-soft: var(--soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-sans: "Inter Variable", system-ui, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  color: var(--ink);
+  background: var(--bg);
+  font-feature-settings: "cv11", "ss03";
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary {
+  list-style: none;
+}
+
+/* Long-form legal pages */
+.prose-legal h2 {
+  margin-top: 2.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.prose-legal p,
+.prose-legal ul {
+  margin-top: 1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.prose-legal ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.prose-legal address {
+  margin-top: 1rem;
+  font-style: normal;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.prose-legal a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

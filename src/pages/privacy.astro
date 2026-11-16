@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { operator } from '../config/site';
+---
+
+<Layout title="Privacy - Open Conversation Format" description="Privacy policy for open-conversation-format.org." noindex>
+  <LegalPage eyebrow="Legal" title="Privacy policy">
+    <p>
+      This privacy policy describes how we handle personal data when you visit this website or contact us. "Personal data" means any information relating to an identified or identifiable natural person.
+    </p>
+    <p>
+      The short version: this website sets no cookies, uses no analytics and loads nothing from third parties. The fonts are served from this server.
+    </p>
+
+    <h2>Controller</h2>
+    <p>The controller responsible for data processing under the GDPR is:</p>
+    <address>
+      {operator.company}<br />
+      {operator.street}<br />
+      {operator.city}, {operator.country}<br />
+      Phone: {operator.phone}<br />
+      Email: <a href={`mailto:${operator.email}`}>{operator.email}</a>
+    </address>
+
+    <h2>Hosting and server log files</h2>
+    <p>
+      You can visit this website without providing any personal information. Each access transmits technical data to the server, which is stored in server log files. This data includes, for example, the name of the page accessed, date and time of access, the IP address, the amount of data transferred and the requesting provider.
+    </p>
+    <p>
+      Processing is based on Art. 6(1)(f) GDPR, on our overriding legitimate interest in the trouble-free and secure operation of this website. The website runs on a server that we rent from a hosting provider, which processes this data on our behalf under Art. 28 GDPR.
+    </p>
+
+    <h2>Cookies, analytics and third parties</h2>
+    <p>
+      This website does not set cookies and does not use analytics or tracking tools. It does not embed content from third parties, so visiting it does not transmit your data to anyone else.
+    </p>
+
+    <h2>Links to GitHub</h2>
+    <p>
+      The specification and the code are hosted on GitHub. When you follow a link to GitHub, you leave this website, and the privacy policy of GitHub applies.
+    </p>
+
+    <h2>Contact by email</h2>
+    <p>
+      When you contact us by email, we process your personal data (name, email address, message) only to the extent you provide it, in order to handle and answer your request. This is based on Art. 6(1)(f) GDPR, on our overriding legitimate interest in answering your request. Your data is deleted afterwards, in compliance with statutory retention periods.
+    </p>
+
+    <h2>Your rights</h2>
+    <p>Under the GDPR you have the right to:</p>
+    <ul>
+      <li>access the personal data we hold about you (Art. 15),</li>
+      <li>have inaccurate data corrected (Art. 16),</li>
+      <li>have your data erased (Art. 17),</li>
+      <li>have the processing restricted (Art. 18),</li>
+      <li>receive your data in a portable format (Art. 20),</li>
+      <li>object to processing that is based on Art. 6(1)(f) GDPR (Art. 21),</li>
+      <li>lodge a complaint with a data protection supervisory authority (Art. 77).</li>
+    </ul>
+    <p>To exercise these rights, write to the email address above.</p>
+
+    <p>Last updated: November 2026</p>
+  </LegalPage>
+</Layout>

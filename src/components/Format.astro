@@ -1,0 +1,89 @@
+---
+import Section from './Section.astro';
+import { links } from '../config/site';
+import sample from '../data/sample.ocf.json?raw';
+
+// Mark the lines that belong to a "message" object: that part is the plain
+// OpenAI Messages shape. Everything else is the OCF envelope.
+const lines: { text: string; core: boolean }[] = [];
+let coreIndent = -1;
+for (const text of sample.trimEnd().split('\n')) {
+  const indent = text.length - text.trimStart().length;
+  const trimmed = text.trim();
+  if (coreIndent < 0 && trimmed.startsWith('"message": {')) {
+    coreIndent = indent;
+    lines.push({ text, core: true });
+    continue;
+  }
+  if (coreIndent >= 0) {
+    lines.push({ text, core: true });
+    if (indent === coreIndent && trimmed.startsWith('}')) coreIndent = -1;
+    continue;
+  }
+  lines.push({ text, core: false });
+}
+
+const facts = [
+  {
+    head: 'One session, one file.',
+    text: 'A snapshot as .ocf.json, an append-only log as .ocf.jsonl, or a .ocf.zip bundle with the attached files.',
+  },
+  {
+    head: 'The whole session.',
+    text: 'Tool calls and their results, thinking, branches, the model and the token usage of every turn.',
+  },
+  {
+    head: 'Versioned.',
+    text: 'A JSON Schema defines the format. Every file carries its ocf_version.',
+  },
+];
+
+const refs = [
+  { label: 'JSON Schema', href: links.schema },
+  { label: 'Mapping per tool', href: links.mapping },
+  { label: 'Examples', href: links.examples },
+];
+---
+
+<Section
+  id="format"
+  eyebrow="The format"
+  title="Small on purpose."
+  lead="The message is the OpenAI Messages shape you already know. OCF adds the envelope around it: ids, timestamps, model, token usage, branches, attached files."
+>
+  <div class="grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+    <figure>
+      <pre class="overflow-x-auto rounded-lg border border-line bg-soft py-5 font-mono text-[13px] leading-6"><code>{lines.map((line) => (
+        <span class={`block px-5 ${line.core ? 'border-l-2 border-accent bg-bg' : 'border-l-2 border-transparent'}`}>{line.text}</span>
+      ))}</code></pre>
+      <figcaption class="mt-3 flex items-center gap-2 font-mono text-[12.5px] text-muted">
+        <span class="inline-block h-3.5 w-1 bg-accent" aria-hidden="true"></span>
+        Marked: the message itself. Everything else: the OCF envelope.
+      </figcaption>
+    </figure>
+
+    <div>
+      <dl class="space-y-6">
+        {
+          facts.map((fact) => (
+            <div>
+              <dt class="font-medium">{fact.head}</dt>
+              <dd class="mt-1 leading-relaxed text-muted">{fact.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <ul class="mt-8 space-y-2 border-t border-line pt-6">
+        {
+          refs.map((ref) => (
+            <li>
+              <a href={ref.href} class="font-medium text-accent-ink underline underline-offset-4">
+                {ref.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

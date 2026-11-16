@@ -1,0 +1,56 @@
+---
+import Section from './Section.astro';
+
+const items = [
+  {
+    q: 'Does anything leave my machine?',
+    a: 'No. OCF reads local session files and writes local files. No account, no telemetry.',
+  },
+  {
+    q: 'Do I need a search server?',
+    a: 'No. The archive and the Markdown copies work on their own. Search is optional and uses Meilisearch.',
+  },
+  {
+    q: 'Which platforms?',
+    a: 'It is used daily on Windows. The macOS and Linux paths are implemented, reports are welcome.',
+  },
+  {
+    q: 'Is the format stable?',
+    a: 'It is a 0.1 draft, so the schema can still change. Every file carries its ocf_version, so files can be migrated.',
+  },
+  {
+    q: 'Can I read the files without OCF?',
+    a: 'Yes. They are JSON, and the Markdown copies open in any editor.',
+  },
+  {
+    q: 'Is a move between tools lossless?',
+    a: 'Between machines in the same tool, that is the goal. Between tools, the target gets what it can hold and the archive keeps the complete original.',
+  },
+  {
+    q: 'My tool is missing.',
+    a: 'A read adapter is two methods. Start from an existing one in ocf-py and open a pull request.',
+  },
+  {
+    q: 'Who is behind this?',
+    a: 'An independent open-source project under Apache 2.0. It is not affiliated with any model or tool vendor.',
+  },
+];
+---
+
+<Section id="faq" eyebrow="FAQ" title="Short answers.">
+  <div class="max-w-3xl border-b border-line">
+    {
+      items.map((item) => (
+        <details class="group border-t border-line">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-5 font-medium">
+            {item.q}
+            <span class="inline-block font-mono text-lg text-accent-ink transition-transform group-open:rotate-45" aria-hidden="true">
+              +
+            </span>
+          </summary>
+          <p class="pb-6 pr-10 leading-relaxed text-muted">{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</Section>

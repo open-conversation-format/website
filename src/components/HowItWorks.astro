@@ -1,0 +1,71 @@
+---
+import Section from './Section.astro';
+import { links } from '../config/site';
+
+const steps = [
+  {
+    note: '1. Install (needs Python 3.11+ and uv)',
+    cmd: 'uv tool install git+https://github.com/open-conversation-format/ocf-py',
+  },
+  {
+    note: '2. Export what is on this machine',
+    cmd: 'ocf export claude-code-cli --out ./ocf-archive',
+  },
+  {
+    note: '3. Read it anywhere as Markdown',
+    cmd: 'ocf render ./ocf-archive --out ./ocf-archive-md',
+  },
+];
+
+const notes = [
+  {
+    head: 'Keep it current.',
+    text: 'The command "ocf sync" does export, Markdown and search continuously. "ocf app" adds a tray icon.',
+  },
+  {
+    head: 'Any folder works.',
+    text: 'A local disk, a NAS or a synced drive. Several machines can write into one archive.',
+  },
+  {
+    head: 'In daily use.',
+    text: 'More than 4,000 real sessions from seven sources, going back to 2023.',
+  },
+];
+
+const sources = ['claude-code-cli', 'claude-code-app', 'claude-cowork-app', 'codex', 'cursor', 'chatgpt', 'claude-ai'];
+---
+
+<Section id="start" eyebrow="Get started" title="Three commands to your own archive.">
+  <div class="overflow-x-auto rounded-lg border border-line bg-soft p-6 font-mono text-[13.5px] leading-7">
+    {
+      steps.map((step, i) => (
+        <div class={i > 0 ? 'mt-5' : ''}>
+          <p class="whitespace-nowrap text-muted"># {step.note}</p>
+          <p class="whitespace-nowrap">
+            <span class="select-none text-accent-ink">$&nbsp;</span>{step.cmd}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-4 flex flex-wrap items-center gap-2 font-mono text-[12.5px]">
+    <span class="mr-1 text-muted">Sources for step 2:</span>
+    {sources.map((s) => <span class="rounded border border-line px-2 py-1">{s}</span>)}
+  </div>
+
+  <dl class="mt-12 grid gap-8 md:grid-cols-3">
+    {
+      notes.map((note) => (
+        <div>
+          <dt class="font-medium">{note.head}</dt>
+          <dd class="mt-1 leading-relaxed text-muted">{note.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <p class="mt-10">
+    <a href={links.ocfpy} class="font-medium text-accent-ink underline underline-offset-4">ocf-py on GitHub</a>
+  </p>
+</Section>

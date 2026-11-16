@@ -1,0 +1,35 @@
+---
+import Logo from './Logo.astro';
+import { links } from '../config/site';
+
+const items = [
+  { label: 'Why', href: '/#why' },
+  { label: 'Get started', href: '/#start' },
+  { label: 'Format', href: '/#format' },
+  { label: 'Adapters', href: '/#adapters' },
+  { label: 'Roadmap', href: '/#roadmap' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-bg">
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+    <a href="/" aria-label="Open Conversation Format, home" class="text-ink">
+      <Logo class="h-7 w-auto" />
+    </a>
+    <nav aria-label="Main" class="flex items-center gap-7 font-mono text-[13px]">
+      {
+        items.map((item) => (
+          <a href={item.href} class="hidden text-muted transition-colors hover:text-ink md:inline">
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={links.org}
+        class="rounded-md border border-line px-3 py-1.5 text-ink transition-colors hover:border-ink"
+      >
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>

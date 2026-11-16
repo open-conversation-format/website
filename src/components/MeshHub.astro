@@ -1,0 +1,38 @@
+---
+// Two small figures: seven tools wired pairwise (42 one-way converters)
+// against seven tools around one format (14 adapters: one reader and one
+// writer per tool).
+const n = 7;
+const cx = 110;
+const cy = 110;
+const r = 84;
+const pts = Array.from({ length: n }, (_, i) => {
+  const a = ((-90 + (i * 360) / n) * Math.PI) / 180;
+  return { x: +(cx + r * Math.cos(a)).toFixed(1), y: +(cy + r * Math.sin(a)).toFixed(1) };
+});
+const pairs = pts.flatMap((p, i) => pts.slice(i + 1).map((q) => ({ p, q })));
+---
+
+<div class="grid max-w-xl grid-cols-2 gap-6">
+  <figure>
+    <svg viewBox="0 0 220 220" class="w-full" role="img" aria-label="Seven tools, each connected to every other one">
+      {pairs.map(({ p, q }) => <line x1={p.x} y1={p.y} x2={q.x} y2={q.y} class="stroke-line-strong" stroke-width="1" />)}
+      {pts.map((p) => <circle cx={p.x} cy={p.y} r="7" class="fill-bg stroke-ink" stroke-width="1.5" />)}
+    </svg>
+    <figcaption class="mt-2 text-center">
+      <span class="block font-mono text-3xl font-bold">42</span>
+      <span class="text-sm text-muted">one-way converters</span>
+    </figcaption>
+  </figure>
+  <figure>
+    <svg viewBox="0 0 220 220" class="w-full" role="img" aria-label="Seven tools, each connected to one format in the middle">
+      {pts.map((p) => <line x1={p.x} y1={p.y} x2={cx} y2={cy} class="stroke-accent" stroke-width="1.5" />)}
+      {pts.map((p) => <circle cx={p.x} cy={p.y} r="7" class="fill-bg stroke-ink" stroke-width="1.5" />)}
+      <circle cx={cx} cy={cy} r="13" class="fill-accent"></circle>
+    </svg>
+    <figcaption class="mt-2 text-center">
+      <span class="block font-mono text-3xl font-bold text-accent-ink">14</span>
+      <span class="text-sm text-muted">adapters around one format</span>
+    </figcaption>
+  </figure>
+</div>

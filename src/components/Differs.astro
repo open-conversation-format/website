@@ -1,0 +1,35 @@
+---
+import Section from './Section.astro';
+
+const rows = [
+  {
+    what: 'Converters',
+    text: 'move a session from A to B. Their format is whatever the parser does today. OCF is a versioned spec with a JSON Schema that anyone can build on.',
+  },
+  {
+    what: 'Session viewers',
+    text: 'read many tools into their own database. Nothing comes back out.',
+  },
+  {
+    what: 'Vendor importers',
+    text: 'pull you into one product, with a trimmed copy. OCF is neutral ground.',
+  },
+  {
+    what: 'Cloud services',
+    text: 'store your sessions on their servers. OCF writes files to yours.',
+  },
+];
+---
+
+<Section eyebrow="How it differs" title="A format, not another app.">
+  <dl class="border-b border-line">
+    {
+      rows.map((row) => (
+        <div class="grid gap-1 border-t border-line py-5 md:grid-cols-[14rem_1fr] md:gap-6">
+          <dt class="font-medium">{row.what}</dt>
+          <dd class="leading-relaxed text-muted">{row.text}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</Section>

@@ -1,0 +1,35 @@
+{
+  "ocf_version": "0.1.0",
+  "conversation": {
+    "id": "conv_001",
+    "title": "Fix parser empty-row crash",
+    "created_at": "2026-04-26T16:00:00Z"
+  },
+  "messages": [
+    {
+      "id": "msg_001",
+      "created_at": "2026-04-26T16:00:00Z",
+      "message": {
+        "role": "user",
+        "content": "parser.py crashes on empty rows. Please fix it."
+      }
+    },
+    {
+      "id": "msg_002",
+      "created_at": "2026-04-26T16:00:05Z",
+      "model": "claude-sonnet-4-6",
+      "usage": { "input": 240, "output": 95 },
+      "message": {
+        "role": "assistant",
+        "content": "I'll read the file first.",
+        "tool_calls": [
+          {
+            "id": "call_001",
+            "type": "function",
+            "function": { "name": "read_file", "arguments": "{\"path\":\"parser.py\"}" }
+          }
+        ]
+      }
+    }
+  ]
+}

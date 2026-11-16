@@ -1,0 +1,46 @@
+---
+import HubDiagram from './HubDiagram.astro';
+import { links } from '../config/site';
+
+const status = ['Reads 7 sources today', 'Writing back is next', 'Apache 2.0', 'Runs locally, no account'];
+---
+
+<section class="mx-auto max-w-5xl px-6 pb-20 pt-16 text-center md:pb-28 md:pt-24">
+  <p class="font-mono text-[13px] text-muted">
+    Open Conversation Format{' '}<span class="text-accent-ink">v0.1 draft</span>
+  </p>
+  <h1 class="mx-auto mt-5 max-w-4xl text-[2.6rem] font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+    One open format for every AI session.
+  </h1>
+  <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+    OCF lets a session move: from one machine to the next, from Claude Code to Codex. One adapter per tool. Plain files you own.
+  </p>
+
+  <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+    <a
+      href="#start"
+      class="rounded-md bg-accent px-5 py-3 font-medium text-white transition-opacity hover:opacity-90"
+    >
+      Get started
+    </a>
+    <a
+      href={links.spec}
+      class="rounded-md border border-line-strong px-5 py-3 font-medium text-ink transition-colors hover:border-ink"
+    >
+      Read the spec
+    </a>
+  </div>
+
+  <ul class="mt-8 flex flex-col items-center gap-x-3 gap-y-1 font-mono text-[12.5px] text-muted sm:flex-row sm:flex-wrap sm:justify-center">
+    {
+      status.map((item, i) => (
+        <li class="flex items-center gap-3">
+          {i > 0 && <span aria-hidden="true" class="hidden sm:inline">·</span>}
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+
+  <HubDiagram />
+</section>

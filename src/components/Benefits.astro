@@ -1,0 +1,48 @@
+---
+import Section from './Section.astro';
+import Status from './Status.astro';
+
+const items = [
+  {
+    verb: 'Sync',
+    state: 'next',
+    line: 'Same session, every machine.',
+    text: 'Start on the desktop, continue on the laptop. Same tool, complete history, no cloud in between.',
+  },
+  {
+    verb: 'Switch',
+    state: 'planned',
+    line: 'Take a session to another tool.',
+    text: 'Claude Code to Codex, Cursor to OpenCode. The target gets everything it can hold. The original stays complete.',
+  },
+  {
+    verb: 'Keep',
+    state: 'today',
+    line: 'Tools delete. Files stay.',
+    text: 'Every session is copied to your archive while you work: tool calls, results, thinking, branches, models, token usage.',
+  },
+  {
+    verb: 'Find',
+    state: 'today',
+    line: 'One search for everything.',
+    text: 'Every tool, every machine, years back. Readable as Markdown, searchable with Meilisearch if you want it.',
+  },
+] as const;
+---
+
+<Section eyebrow="What you get" title="Four things one format makes possible.">
+  <div class="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
+    {
+      items.map((item) => (
+        <article class="bg-bg p-7 md:p-9">
+          <div class="flex items-center justify-between">
+            <h3 class="font-mono text-xl font-bold">{item.verb}.</h3>
+            <Status state={item.state} />
+          </div>
+          <p class="mt-5 text-lg font-medium">{item.line}</p>
+          <p class="mt-2 leading-relaxed text-muted">{item.text}</p>
+        </article>
+      ))
+    }
+  </div>
+</Section>

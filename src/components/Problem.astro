@@ -1,0 +1,39 @@
+---
+import Section from './Section.astro';
+
+const rows = [
+  { tool: 'Claude Code', store: 'JSONL files in its own folder', catch: 'Deleted after 30 days by default.' },
+  { tool: 'Codex', store: 'Rollout files, compressed', catch: 'Its own layout and compression.' },
+  { tool: 'Cursor', store: 'One SQLite database', catch: 'No bulk export.' },
+  { tool: 'ChatGPT', store: 'On a server', catch: 'A ZIP file, by request, by hand.' },
+  { tool: 'Claude.ai', store: 'On a server', catch: 'A ZIP file, by request. The link expires after 24 hours.' },
+];
+---
+
+<Section
+  id="why"
+  eyebrow="The problem"
+  title="A session lives in one tool, on one machine. Until it is deleted."
+>
+  <div class="border-b border-line">
+    <div class="hidden grid-cols-[1fr_1.4fr_1.8fr] gap-6 pb-3 font-mono text-[12.5px] text-muted md:grid">
+      <span>Tool</span>
+      <span>Keeps your sessions as</span>
+      <span>The catch</span>
+    </div>
+    {
+      rows.map((row) => (
+        <div class="grid gap-1 border-t border-line py-4 md:grid-cols-[1fr_1.4fr_1.8fr] md:gap-6">
+          <span class="font-medium">{row.tool}</span>
+          <span class="text-muted">{row.store}</span>
+          <span>{row.catch}</span>
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="mt-10 max-w-2xl text-lg leading-relaxed text-muted">
+    Five tools, five formats. Moving between them means starting over, or importing a trimmed copy.{' '}
+    <span class="text-ink">OCF puts one format in the middle.</span>
+  </p>
+</Section>

@@ -1,0 +1,19 @@
+---
+// One small label for "how far along is this": today, next, planned, n/a.
+interface Props {
+  state: 'today' | 'yes' | 'next' | 'planned' | 'n/a';
+}
+const { state } = Astro.props;
+
+const styles: Record<Props['state'], string> = {
+  today: 'border-accent bg-accent text-white',
+  yes: 'border-accent bg-accent text-white',
+  next: 'border-accent text-accent-ink',
+  planned: 'border-line-strong text-muted',
+  'n/a': 'border-transparent text-muted',
+};
+---
+
+<span class={`inline-block rounded-full border px-2.5 py-0.5 font-mono text-[11.5px] leading-5 ${styles[state]}`}>
+  {state}
+</span>

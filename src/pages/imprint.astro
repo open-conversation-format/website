@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { operator, links } from '../config/site';
+---
+
+<Layout title="Imprint - Open Conversation Format" description="Legal notice for open-conversation-format.org." noindex>
+  <LegalPage eyebrow="Legal" title="Imprint">
+    <p>open-conversation-format.org is operated by</p>
+    <address>
+      <strong>{operator.company}</strong><br />
+      {operator.street}<br />
+      {operator.city}<br />
+      {operator.country}
+    </address>
+    <p>
+      Represented by the managing director: {operator.director}<br />
+      VAT ID: {operator.vatId}<br />
+      Commercial register: {operator.register}
+    </p>
+    <p>
+      Phone: {operator.phone}<br />
+      Email: <a href={`mailto:${operator.email}`}>{operator.email}</a>
+    </p>
+
+    <h2>Responsible for content under § 18(2) MStV</h2>
+    <address>
+      {operator.director}<br />
+      {operator.street}<br />
+      {operator.city}<br />
+      {operator.country}
+    </address>
+
+    <h2>Licenses and names</h2>
+    <p>
+      The Open Conversation Format specification, its brand assets and the reference implementation are published under the
+      <a href={links.license}>Apache License 2.0</a>. The sources are in the
+      <a href={links.org}>project repositories</a>.
+    </p>
+    <p>
+      Open Conversation Format (OCF) is an independent project. It is not affiliated with, endorsed by or sponsored by the makers of the tools named on this site. Claude Code, Codex, Cursor, ChatGPT and other product names are trademarks of their owners and are used only to describe compatibility.
+    </p>
+
+    <h2>Links to other websites</h2>
+    <p>
+      For all web content connected by hyperlink, the provider assumes no responsibility, as this is not its own content. The linked pages were checked for unlawful content; at the time of linking, none was apparent. Responsibility for the content of the linked pages lies with their operator. If a legal violation becomes known, the corresponding link will be removed immediately.
+    </p>
+  </LegalPage>
+</Layout>

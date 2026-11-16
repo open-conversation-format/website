@@ -1,0 +1,29 @@
+---
+import Logo from './Logo.astro';
+import { links } from '../config/site';
+
+const items = [
+  { label: 'Spec', href: links.spec },
+  { label: 'ocf-py', href: links.ocfpy },
+  { label: 'Roadmap', href: links.roadmap },
+  { label: 'License', href: links.license },
+  { label: 'Imprint', href: '/imprint/' },
+  { label: 'Privacy', href: '/privacy/' },
+];
+---
+
+<footer class="border-t border-line">
+  <div class="mx-auto max-w-5xl px-6 py-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+      <a href="/" aria-label="Open Conversation Format, home" class="text-ink">
+        <Logo class="h-6 w-auto" />
+      </a>
+      <nav aria-label="Footer" class="flex flex-wrap gap-x-7 gap-y-2 font-mono text-[13px] text-muted">
+        {items.map((item) => <a href={item.href} class="transition-colors hover:text-ink">{item.label}</a>)}
+      </nav>
+    </div>
+    <p class="mt-8 max-w-2xl text-sm leading-relaxed text-muted">
+      Open Conversation Format (OCF) is an independent open-source project, licensed under Apache 2.0. Claude Code, Codex, Cursor, ChatGPT and other product names belong to their owners.
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,151 @@
+---
+// Hero figure: tools on two machines around one format.
+// Solid arrows: read adapters (work today). Dashed arrows: write adapters (next).
+// The dashed "..." box on each side says: more tools can be added.
+const left = ['Claude Code', 'Codex', 'Cursor', '...'];
+const right = ['Claude Code', 'Codex', 'OpenCode', '...'];
+const more = (t: string) => t === '...';
+
+// Wide layout (viewBox 760 x 392)
+const rowY = [62, 126, 190, 254];
+const hubY = [162, 174, 186, 198];
+
+// Narrow layout (viewBox 360 x 532): tools in a 2 x 2 grid per machine
+const cell = [
+  { x: 24, y: 0 },
+  { x: 186, y: 0 },
+  { x: 24, y: 54 },
+  { x: 186, y: 54 },
+];
+
+const title = 'How OCF connects tools and machines';
+const desc =
+  'Read adapters, which work today, bring sessions from the tools on machine A into OCF, one open format. Write adapters, which come next, write sessions from OCF into the tools on machine B. More tools can be added on both sides.';
+---
+
+<figure class="mx-auto mt-14 max-w-[860px] md:mt-16">
+  <svg viewBox="0 0 760 392" class="hidden w-full text-ink sm:block" role="img" aria-labelledby="hub-t hub-d">
+    <title id="hub-t">{title}</title>
+    <desc id="hub-d">{desc}</desc>
+    <defs>
+      <marker id="hub-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </marker>
+    </defs>
+
+    <rect x="20" y="20" width="220" height="312" rx="10" class="fill-none stroke-line-strong" stroke-dasharray="4 5"></rect>
+    <text x="38" y="46" class="fill-muted font-mono text-[13px]">Machine A</text>
+    {
+      left.map((t, i) => (
+        <g>
+          <rect
+            x="40"
+            y={rowY[i]}
+            width="180"
+            height="46"
+            rx="6"
+            class={more(t) ? 'fill-none stroke-line-strong' : 'fill-bg stroke-ink'}
+            stroke-dasharray={more(t) ? '4 5' : undefined}
+          />
+          <text x="130" y={rowY[i] + 23} text-anchor="middle" dominant-baseline="central" class="fill-ink font-sans text-[15px] font-medium">
+            {t}
+          </text>
+          <line x1="220" y1={rowY[i] + 23} x2="303" y2={hubY[i]} class="stroke-ink" stroke-width="1.25" marker-end="url(#hub-arrow)" />
+        </g>
+      ))
+    }
+
+    <rect x="520" y="20" width="220" height="312" rx="10" class="fill-none stroke-line-strong" stroke-dasharray="4 5"></rect>
+    <text x="538" y="46" class="fill-muted font-mono text-[13px]">Machine B</text>
+    {
+      right.map((t, i) => (
+        <g>
+          <rect
+            x="540"
+            y={rowY[i]}
+            width="180"
+            height="46"
+            rx="6"
+            class={more(t) ? 'fill-none stroke-line-strong' : 'fill-bg stroke-ink'}
+            stroke-dasharray={more(t) ? '4 5' : undefined}
+          />
+          <text x="630" y={rowY[i] + 23} text-anchor="middle" dominant-baseline="central" class="fill-ink font-sans text-[15px] font-medium">
+            {t}
+          </text>
+          <line x1="457" y1={hubY[i]} x2="533" y2={rowY[i] + 23} class="stroke-ink" stroke-width="1.25" stroke-dasharray="5 5" marker-end="url(#hub-arrow)" />
+        </g>
+      ))
+    }
+
+    <rect x="310" y="146" width="140" height="68" rx="8" class="fill-bg stroke-accent" stroke-width="2"></rect>
+    <text x="380" y="172" text-anchor="middle" dominant-baseline="central" class="fill-ink font-mono text-[19px] font-extrabold">[ OCF ]</text>
+    <text x="380" y="196" text-anchor="middle" dominant-baseline="central" class="fill-muted font-sans text-[12.5px]">one open format</text>
+
+    <line x1="196" y1="366" x2="232" y2="366" class="stroke-ink" stroke-width="1.25" marker-end="url(#hub-arrow)"></line>
+    <text x="244" y="366" dominant-baseline="central" class="fill-muted font-mono text-[12.5px]">read: works today</text>
+    <line x1="420" y1="366" x2="456" y2="366" class="stroke-ink" stroke-width="1.25" stroke-dasharray="5 5" marker-end="url(#hub-arrow)"></line>
+    <text x="468" y="366" dominant-baseline="central" class="fill-muted font-mono text-[12.5px]">write: next</text>
+  </svg>
+
+  <svg viewBox="0 0 360 532" class="w-full text-ink sm:hidden" role="img" aria-labelledby="hubm-t hubm-d">
+    <title id="hubm-t">{title}</title>
+    <desc id="hubm-d">{desc}</desc>
+    <defs>
+      <marker id="hubm-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </marker>
+    </defs>
+
+    <rect x="10" y="10" width="340" height="150" rx="10" class="fill-none stroke-line-strong" stroke-dasharray="4 5"></rect>
+    <text x="24" y="32" class="fill-muted font-mono text-[12.5px]">Machine A</text>
+    {
+      left.map((t, i) => (
+        <g>
+          <rect
+            x={cell[i].x}
+            y={46 + cell[i].y}
+            width="150"
+            height="40"
+            rx="6"
+            class={more(t) ? 'fill-none stroke-line-strong' : 'fill-bg stroke-ink'}
+            stroke-dasharray={more(t) ? '4 5' : undefined}
+          />
+          <text x={cell[i].x + 75} y={66 + cell[i].y} text-anchor="middle" dominant-baseline="central" class="fill-ink font-sans text-[14px] font-medium">
+            {t}
+          </text>
+        </g>
+      ))
+    }
+
+    <line x1="180" y1="160" x2="180" y2="225" class="stroke-ink" stroke-width="1.25" marker-end="url(#hubm-arrow)"></line>
+    <text x="194" y="194" dominant-baseline="central" class="fill-muted font-mono text-[12px]">read: works today</text>
+
+    <rect x="110" y="232" width="140" height="68" rx="8" class="fill-bg stroke-accent" stroke-width="2"></rect>
+    <text x="180" y="258" text-anchor="middle" dominant-baseline="central" class="fill-ink font-mono text-[19px] font-extrabold">[ OCF ]</text>
+    <text x="180" y="282" text-anchor="middle" dominant-baseline="central" class="fill-muted font-sans text-[12.5px]">one open format</text>
+
+    <line x1="180" y1="300" x2="180" y2="365" class="stroke-ink" stroke-width="1.25" stroke-dasharray="5 5" marker-end="url(#hubm-arrow)"></line>
+    <text x="194" y="334" dominant-baseline="central" class="fill-muted font-mono text-[12px]">write: next</text>
+
+    <rect x="10" y="372" width="340" height="150" rx="10" class="fill-none stroke-line-strong" stroke-dasharray="4 5"></rect>
+    <text x="24" y="394" class="fill-muted font-mono text-[12.5px]">Machine B</text>
+    {
+      right.map((t, i) => (
+        <g>
+          <rect
+            x={cell[i].x}
+            y={408 + cell[i].y}
+            width="150"
+            height="40"
+            rx="6"
+            class={more(t) ? 'fill-none stroke-line-strong' : 'fill-bg stroke-ink'}
+            stroke-dasharray={more(t) ? '4 5' : undefined}
+          />
+          <text x={cell[i].x + 75} y={428 + cell[i].y} text-anchor="middle" dominant-baseline="central" class="fill-ink font-sans text-[14px] font-medium">
+            {t}
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+</figure>

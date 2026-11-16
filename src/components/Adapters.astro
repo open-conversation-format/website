@@ -1,0 +1,74 @@
+---
+import Section from './Section.astro';
+import Status from './Status.astro';
+import MeshHub from './MeshHub.astro';
+import { links } from '../config/site';
+
+type State = 'yes' | 'next' | 'planned' | 'n/a';
+const rows: { tool: string; note?: string; read: State; write: State }[] = [
+  { tool: 'Claude Code', note: 'CLI, Desktop, Cowork', read: 'yes', write: 'next' },
+  { tool: 'Codex', read: 'yes', write: 'planned' },
+  { tool: 'Cursor', read: 'yes', write: 'planned' },
+  { tool: 'ChatGPT', note: 'data export', read: 'yes', write: 'n/a' },
+  { tool: 'Claude.ai', note: 'data export', read: 'yes', write: 'n/a' },
+  { tool: 'OpenCode', read: 'planned', write: 'planned' },
+  { tool: 'pi', read: 'planned', write: 'planned' },
+  { tool: 'Hermes Agent', read: 'planned', write: 'n/a' },
+];
+---
+
+<Section
+  id="adapters"
+  eyebrow="Adapters"
+  title="One adapter per tool."
+  lead="Seven tools need 42 one-way converters to talk to each other. Or 14 adapters around one format."
+>
+  <div class="grid items-start gap-12 lg:grid-cols-2">
+    <div>
+      <MeshHub />
+      <p class="mt-10 leading-relaxed text-muted">
+        <span class="font-medium text-ink">A read adapter is two methods:</span>{' '}
+        where the tool keeps its sessions, and how one session becomes an OCF document. Add your tool once. It gets the archive, the search and every write adapter that follows.
+      </p>
+      <p class="mt-5">
+        <a href={links.adapters} class="font-medium text-accent-ink underline underline-offset-4">
+          Write an adapter
+        </a>
+      </p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left">
+        <thead class="font-mono text-[12.5px] text-muted">
+          <tr>
+            <th scope="col" class="pb-3 font-normal">Tool</th>
+            <th scope="col" class="w-24 pb-3 font-normal">Read</th>
+            <th scope="col" class="w-24 pb-3 font-normal">Write</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr class="border-t border-line">
+                <th scope="row" class="py-3.5 pr-4 font-medium">
+                  {row.tool}
+                  {row.note && <span class="block text-sm font-normal text-muted sm:ml-2 sm:inline">{row.note}</span>}
+                </th>
+                <td class="py-3.5">
+                  <Status state={row.read} />
+                </td>
+                <td class="py-3.5">
+                  <Status state={row.write} />
+                </td>
+              </tr>
+            ))
+          }
+          <tr class="border-t border-line">
+            <th scope="row" class="py-3.5 pr-4 font-medium text-muted">Your tool</th>
+            <td colspan="2" class="py-3.5 text-sm text-muted">one adapter away</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Section>

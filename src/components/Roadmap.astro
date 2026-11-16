@@ -1,0 +1,56 @@
+---
+import Section from './Section.astro';
+import { links } from '../config/site';
+
+const steps = [
+  {
+    when: 'Now',
+    current: true,
+    head: 'Read adapters',
+    text: 'Seven sources into one archive. Markdown, search, several machines.',
+  },
+  {
+    when: 'Next',
+    current: false,
+    head: 'Write adapters',
+    text: 'Claude Code first: a session from machine A resumes on machine B.',
+  },
+  {
+    when: 'Then',
+    current: false,
+    head: 'Tool to tool',
+    text: 'Claude Code to Codex as the first pair. More adapters, loadable as plugins.',
+  },
+  {
+    when: 'Later',
+    current: false,
+    head: 'Next to the code',
+    text: 'Sessions stored with the commits they produced. A JavaScript library.',
+  },
+];
+---
+
+<Section id="roadmap" eyebrow="Roadmap" title="Read first. Write next.">
+  <ol class="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+    {
+      steps.map((step) => (
+        <li class="bg-bg p-6">
+          <p class={`font-mono text-[12.5px] ${step.current ? 'text-accent-ink' : 'text-muted'}`}>
+            <span
+              class={`mr-2 inline-block h-2 w-2 rounded-full ${step.current ? 'bg-accent' : 'border border-line-strong'}`}
+              aria-hidden="true"
+            />
+            {step.when}
+          </p>
+          <h3 class="mt-4 text-lg font-semibold">{step.head}</h3>
+          <p class="mt-2 leading-relaxed text-muted">{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="mt-8">
+    <a href={links.roadmap} class="font-medium text-accent-ink underline underline-offset-4">
+      Full roadmap
+    </a>
+  </p>
+</Section>
