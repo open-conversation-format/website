@@ -44,9 +44,11 @@ The repository contains a `Dockerfile` that builds the site and serves it with n
 
 1. New resource from this Git repository, build pack **Dockerfile**.
 2. Port **80**.
-3. Domains: `https://open-conversation-format.org` plus `https://www.open-conversation-format.org`, `https://open-conversation-format.com` and `https://www.open-conversation-format.com`.
+3. Domains: `https://www.open-conversation-format.org`, plus `https://open-conversation-format.org` so the address without `www` gets a certificate too.
 
-`open-conversation-format.org` is the canonical address. `nginx.conf` redirects the other three host names to it with a 301.
+`www.open-conversation-format.org` is the canonical address. When a request for `open-conversation-format.org` or one of the `.com` host names reaches this server, `nginx.conf` redirects it there with a 301.
+
+The image has its own health check: it asks nginx for `/healthz` every 10 seconds. Coolify uses it only while the health check in the Coolify dashboard is switched off. A dashboard check that is switched on replaces it; in that case set its path to `/healthz` and its port to 80.
 
 ## Before going live
 

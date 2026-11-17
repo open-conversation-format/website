@@ -1,7 +1,7 @@
 export const site = {
   name: 'Open Conversation Format',
   short: 'OCF',
-  url: 'https://open-conversation-format.org',
+  url: 'https://www.open-conversation-format.org',
   title: 'Open Conversation Format (OCF) - one open format for every AI session',
   description:
     'OCF is an open file format for AI sessions. One adapter per tool lets a session move between machines and between tools like Claude Code, Codex and Cursor. Plain files you own.',
